@@ -1,6 +1,6 @@
+package Werewolf;
 
-import listeners.MessageListener;
-import listeners.ReadyListener;
+import Werewolf.commands.*;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -10,8 +10,9 @@ import javax.security.auth.login.LoginException;
 
 public class Narrator {
 
-
     public static void main(String[] args) throws LoginException, InterruptedException {
+        Character prefix = '.';
+        Werewolf werewolf = new Werewolf();
         JDA jda = new JDABuilder(new Config().token)
                 .setStatus(OnlineStatus.ONLINE)
                 .setGame(Game.playing("Werewolf"))
@@ -19,6 +20,9 @@ public class Narrator {
                 .setAudioEnabled(false)
                 .addEventListener(new ReadyListener())
                 .addEventListener(new MessageListener())
+                .addEventListener(new Create(werewolf, prefix))
+                .addEventListener(new Join(werewolf, prefix))
+                .addEventListener(new List(werewolf, prefix))
                 .build();
 
         jda.awaitReady();

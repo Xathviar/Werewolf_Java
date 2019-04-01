@@ -1,4 +1,4 @@
-package listeners;
+package Werewolf.commands;
 
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;

@@ -1,4 +1,4 @@
-package listeners;
+package Werewolf.commands;
 
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
@@ -16,8 +16,8 @@ public class MessageListener extends ListenerAdapter {
         Message message = event.getMessage();           //The message that was received.
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //gege
-
         boolean isBot = author.isBot(); //Determines whether user is a bot or not
+
         if (!isBot) {
             if (event.isFromType(ChannelType.PRIVATE)) {
                 channel.sendMessage("[PM] " + event.getAuthor().getName() + ": " + msg).queue();
