@@ -15,7 +15,7 @@ public class MessageListener extends ListenerAdapter {
         User author = event.getAuthor();                //The user that sent the message
         Message message = event.getMessage();           //The message that was received.
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
-        String msg = message.getContentDisplay();       //gege
+        String msg = message.getContentDisplay();       //get msg as String
         boolean isBot = author.isBot(); //Determines whether user is a bot or not
 
         if (!isBot) {

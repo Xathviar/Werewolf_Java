@@ -8,17 +8,13 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-public class Join extends ListenerAdapter {
+public class Start extends ListenerAdapter {
     private Werewolf werewolf;
     private Character prefix;
 
-    public Join(Werewolf werewolf, Character prefix) {
+    public Start(Werewolf werewolf, Character prefix) {
         this.werewolf = werewolf;
         this.prefix = prefix;
-
     }
 
     @Override
@@ -28,20 +24,22 @@ public class Join extends ListenerAdapter {
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
-        Player player = new Player(author);
-
         if (!isBot) {
-            if (msg.equalsIgnoreCase(prefix + "join")) {
+            if (msg.equalsIgnoreCase(prefix + "start")) {
                 if (!werewolf.isGame()) {
                     channel.sendMessage("Please create a game!").queue();
 
                 }else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
-                }else if (werewolf.getPlayers().stream().anyMatch(n -> n.getPlayer().getId().equals(author.getId()))) {
-                    channel.sendMessage("Player " + author.getAsMention() + " is already registered").queue();
+                //}else if (werewolf.getPlayers().size() < 5) {
+                //    channel.sendMessage("Please add " + (5 - werewolf.getPlayers().size()) + " Players").queue();
                 }else {
-                    channel.sendMessage("Player " + author.getAsMention() + " has been successfully added").queue();
-                    werewolf.addPlayer(player);
+                    channel.sendMessage("Game has successfully started.").queue();
+                    werewolf.setRunningGame(true);
+                    werewolf.setRoles();
+                    for (Player player: werewolf.getPlayers()) {
+                        System.out.println(player.getPlayer().getName() + " is a" + (player.isWerewolf()? " Werewolf" : " Villager"));
+                    }
                 }
             }
         }

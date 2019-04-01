@@ -31,9 +31,9 @@ public class List extends ListenerAdapter {
         Player player = new Player(author);
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "list")) {
-                if (!werewolf.game) {
+                if (!werewolf.isGame()) {
                     channel.sendMessage("Please create a game!").queue();
-                }else if (werewolf.runningGame) {
+                }else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
                 }else {
                     EmbedBuilder eb = new EmbedBuilder();
@@ -41,11 +41,10 @@ public class List extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setDescription("");
 
-                    for (Player player1: werewolf.players) {
-                        eb.addField(player1.player.getName(), "", true);
+                    for (Player player1: werewolf.getPlayers()) {
+                        eb.addField(player1.getPlayer().getName(), "", true);
                     }
                     channel.sendMessage(eb.build()).queue();
-                    werewolf.players.add(player);
                 }
             }
         }

@@ -19,10 +19,10 @@ public class Narrator {
                 .setAutoReconnect(true)
                 .setAudioEnabled(false)
                 .addEventListener(new ReadyListener())
-                .addEventListener(new MessageListener())
                 .addEventListener(new Create(werewolf, prefix))
                 .addEventListener(new Join(werewolf, prefix))
                 .addEventListener(new List(werewolf, prefix))
+                .addEventListener(new Start(werewolf, prefix))
                 .build();
 
         jda.awaitReady();

@@ -19,7 +19,6 @@ public class Create extends ListenerAdapter {
 
     @Override
     public void onMessageReceived (MessageReceivedEvent event) {
-
         User author = event.getAuthor();                //The user that sent the message
         Message message = event.getMessage();           //The message that was received.
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
@@ -28,14 +27,14 @@ public class Create extends ListenerAdapter {
 
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "create")) {
-                if (werewolf.game) {
+                if (werewolf.isGame()) {
                     channel.sendMessage("There is already a game.").queue();
 
-                }else if (werewolf.runningGame) {
+                }else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
                 }else {
                     channel.sendMessage("Game has been successfully created.").queue();
-                    werewolf.game = true;
+                    werewolf.setGame(true);
                 }
             }
         }
