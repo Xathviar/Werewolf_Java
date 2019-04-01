@@ -1,6 +1,8 @@
 package Werewolf;
 
 
+import net.dv8tion.jda.core.entities.MessageChannel;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +13,8 @@ public class Werewolf {
     private boolean runningGame;
     private boolean isNight;
     private List<Player> players;
+    private MessageChannel channel;
+
 
     public Werewolf() {
         game = false;
@@ -21,6 +25,11 @@ public class Werewolf {
 
     public boolean allVoted() {
         return players.stream().filter(n -> n.hasVoted()).collect(Collectors.toList()).size() == players.size();
+    }
+
+    public boolean allWWVoted () {
+        return players.stream().filter(n -> n.hasVoted() && n.isWerewolf()).collect(Collectors.toList()).size() == players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
+
     }
 
     public Player getMostVoted() {
@@ -62,7 +71,6 @@ public class Werewolf {
         }
     }
 
-
     public void addPlayer(Player player) {
         players.add(player);
     }
@@ -93,5 +101,38 @@ public class Werewolf {
 
     public void setNight(boolean night) {
         isNight = night;
+    }
+
+    public MessageChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(MessageChannel channel) {
+        this.channel = channel;
+    }
+
+    public void updatePlayers () {
+        List<Player> players1 = new ArrayList<>();
+        List<Player> players2 = new ArrayList<>();
+        int c = 1;
+        for (Player player : players) {
+            if (player.isAlive()) {
+                player.setShortcut(c);
+                c++;
+                players1.add(player);
+            } else {
+                player.setShortcut(0);
+                players2.add(player);
+            }
+        }
+        players1.addAll(players2);
+        players = players1;
+    }
+
+    public boolean checkVictoryWW() {
+        return players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size() == players.size();
+    }
+    public boolean checkVictory() {
+        return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() == players.size();
     }
 }

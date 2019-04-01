@@ -24,7 +24,6 @@ public class Create extends ListenerAdapter {
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
-
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "create")) {
                 if (werewolf.isGame()) {
@@ -33,6 +32,7 @@ public class Create extends ListenerAdapter {
                 }else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
                 }else {
+                    werewolf.setChannel(channel);
                     channel.sendMessage("Game has been successfully created.").queue();
                     werewolf.setGame(true);
                 }

@@ -42,7 +42,7 @@ public class Player {
         return shortcut;
     }
 
-    public void setShortcut(char shortcut) {
+    public void setShortcut(int shortcut) {
         this.shortcut = shortcut;
     }
 

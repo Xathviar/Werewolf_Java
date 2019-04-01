@@ -25,9 +25,12 @@ public class Join extends ListenerAdapter {
     public void onMessageReceived (MessageReceivedEvent event) {
         User author = event.getAuthor();                //The user that sent the message
         Message message = event.getMessage();           //The message that was received.
-        MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
+        MessageChannel channel = werewolf.getChannel(); //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
+        if (werewolf.getChannel() == null) {
+            channel = event.getChannel();
+        }
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "join")) {
                 if (!werewolf.isGame()) {
