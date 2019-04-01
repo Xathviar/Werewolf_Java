@@ -12,11 +12,11 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Vote extends ListenerAdapter {
+public class Vote_WW extends ListenerAdapter {
     private Werewolf werewolf;
     private Character prefix;
 
-    public Vote(Werewolf werewolf, Character prefix) {
+    public Vote_WW(Werewolf werewolf, Character prefix) {
         this.werewolf = werewolf;
         this.prefix = prefix;
     }
@@ -28,7 +28,7 @@ public class Vote extends ListenerAdapter {
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
-        if (!isBot && !event.isFromType(ChannelType.PRIVATE)) {
+        if (!isBot && event.isFromType(ChannelType.PRIVATE)) {
             if (msg.contains((prefix + "vote"))) {
                 if (!werewolf.isGame()) {
                     channel.sendMessage("Please create a game first!").queue();
@@ -37,10 +37,7 @@ public class Vote extends ListenerAdapter {
                     channel.sendMessage("There isn't a running game.").queue();
                     //}else if (werewolf.getPlayers().size() < 5) {
                     //    channel.sendMessage("Please add " + (5 - werewolf.getPlayers().size()) + " Players").queue();
-                } else if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted()) {
-                    if (werewolf.isNight()) {
-                        channel.sendMessage("You cannot vote at night.").queue();
-                    }
+                } else if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted() && werewolf.isNight()) {
                     Matcher matcher = Pattern.compile(".* ([1-9][0-9]*) *").matcher(msg);
                     if (matcher.find()) {
                         int a = Character.getNumericValue(matcher.group(1).charAt(0));

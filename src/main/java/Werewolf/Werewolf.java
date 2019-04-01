@@ -2,17 +2,33 @@ package Werewolf;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Werewolf {
     private boolean game;
     private boolean runningGame;
+    private boolean isNight;
     private List<Player> players;
 
     public Werewolf() {
         game = false;
         runningGame = false;
         players = new ArrayList<Player>();
+        isNight = true;
+    }
+
+    public boolean allVoted() {
+        return players.stream().filter(n -> n.hasVoted()).collect(Collectors.toList()).size() == players.size();
+    }
+
+    public Player getMostVoted() {
+        return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
+    }
+
+    public void resetVoting () {
+        players.forEach(n -> n.resetVoteCounts());
     }
 
     public void setRoles() {
@@ -69,5 +85,13 @@ public class Werewolf {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public boolean isNight() {
+        return isNight;
+    }
+
+    public void setNight(boolean night) {
+        isNight = night;
     }
 }
