@@ -44,7 +44,7 @@ public class Vote extends ListenerAdapter {
                     //    channel.sendMessage("Please add " + (5 - werewolf.getPlayers().size()) + " Players").queue();
                 } else if (werewolf.isNight()) {
                     channel.sendMessage("You cannot vote at night.").queue();
-                } else if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted()) {
+                } else if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().orElse(null).hasVoted()) {
                     Matcher matcher = Pattern.compile(".* ([1-9][0-9]*) *").matcher(msg);
                     if (matcher.find()) {
                         int a = Character.getNumericValue(matcher.group(1).charAt(0));
@@ -54,33 +54,35 @@ public class Vote extends ListenerAdapter {
                             werewolf.getPlayers().get(a - 1).incVoteCounts();
                             Player player = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
                             player.setHasVoted(true);
-                            channel.sendMessage(author.getAsMention() + " voted for " + player.getPlayer().getAsMention()).queue();
-                            channel.sendMessage(player.getPlayer().getAsMention() + " has currently " + player.getVoteCounts() + " Votes").queue();
+                            channel.sendMessage(author.getAsMention() + " voted for " + werewolf.getPlayers().get(a - 1).getPlayer().getAsMention()).queue();
+                            channel.sendMessage(werewolf.getPlayers().get(a - 1).getPlayer().getAsMention() + " has currently " + werewolf.getPlayers().get(a - 1).getVoteCounts() + " Votes").queue();
                             if (werewolf.allVoted()) {
                                 Player dead = werewolf.getMostVoted();
-                                dead.setAlive(false);
-                                channel.sendMessage(dead.getPlayer().getAsMention() + " died").queue();
+                                if (dead==null) {
+                                    channel.sendMessage("No one died").queue();
+                                }else {
+                                    dead.setAlive(false);
+                                    channel.sendMessage(dead.getPlayer().getAsMention() + " died").queue();
+                                }
+                                werewolf.updatePlayers();
                                 werewolf.resetVoting();
+                                werewolf.resetVoted();
                                 if (werewolf.checkVictoryWW()) {
                                     channel.sendMessage("The Werewolves won the game.").queue();
                                     werewolf.setGame(false);
                                     werewolf.setRunningGame(false);
                                     werewolf.setNight(true);
+                                    werewolf.resetPlayer();
                                 } else if (werewolf.checkVictory()) {
                                     channel.sendMessage("The Villagers won the game.").queue();
                                     werewolf.setGame(false);
                                     werewolf.setRunningGame(false);
                                     werewolf.setNight(true);
+                                    werewolf.resetPlayer();
                                 }
-                                channel.sendMessage("After a hard day the villagers go home and start sleeping").queue();
-                                werewolf.setNight(true);
-                                werewolf.updatePlayers();
-                                EmbedBuilder eb = new EmbedBuilder();
-                                eb.setTitle("Player List");
-                                eb.setColor(Color.red);
-                                eb.setDescription("");
-                                for (Player player1: werewolf.getPlayers()) {
-                                    eb.addField(player1.getShortcut() + player1.getPlayer().getName(), "", true);
+                                channel.sendMessage("Player List").queue();
+                                for (Player player1: werewolf.getPlayers())  {
+                                    channel.sendMessage(player1.getShortcut() + ") " + player1.getPlayer().getAsMention()).queue();
                                 }
                             }
                         }

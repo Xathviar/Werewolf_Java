@@ -33,11 +33,19 @@ public class Werewolf {
     }
 
     public Player getMostVoted() {
-        return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
+        if ((double)players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get().getVoteCounts() / (double)players.size() > 0.5) {
+            return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
+        }else {
+            return null;
+        }
     }
 
     public void resetVoting () {
         players.forEach(n -> n.resetVoteCounts());
+    }
+
+    public void resetVoted () {
+        players.forEach(n -> n.setHasVoted(false));
     }
 
     public void setRoles() {
@@ -45,7 +53,7 @@ public class Werewolf {
         int ww = 0;
         while (ww < needed_ww) {
             for (Player player: players) {
-                if (Math.random() < (1.0/getWWCount()) && !player.isWerewolf()) {
+                if (Math.random() < (needed_ww/(double)players.size()) && !player.isWerewolf()) {
                     player.setWerewolf(true);
                     ww++;
                     if (ww == needed_ww) {
@@ -57,17 +65,17 @@ public class Werewolf {
         }
     }
 
-    private int getWWCount() {
+    private double getWWCount() {
         if (players.size() < 7) {
-            return 1;
+            return 1.0;
         }else if (players.size() < 11) {
-            return 2;
+            return 2.0;
         } else if (players.size() < 15) {
-            return 3;
+            return 3.0;
         } else if (players.size() < 19) {
-            return 4;
+            return 4.0;
         } else {
-            return 5;
+            return 5.0;
         }
     }
 
@@ -113,7 +121,6 @@ public class Werewolf {
 
     public void updatePlayers () {
         List<Player> players1 = new ArrayList<>();
-        List<Player> players2 = new ArrayList<>();
         int c = 1;
         for (Player player : players) {
             if (player.isAlive()) {
@@ -122,17 +129,19 @@ public class Werewolf {
                 players1.add(player);
             } else {
                 player.setShortcut(0);
-                players2.add(player);
             }
         }
-        players1.addAll(players2);
         players = players1;
     }
 
     public boolean checkVictoryWW() {
-        return players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size() == players.size();
+        return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() == 0;
     }
     public boolean checkVictory() {
-        return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() == players.size();
+        return players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size() == 0;
+    }
+
+    public void resetPlayer() {
+        players = new ArrayList<>();
     }
 }

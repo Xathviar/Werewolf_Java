@@ -24,6 +24,7 @@ public class Narrator {
                 .addEventListener(new List(werewolf, prefix))
                 .addEventListener(new Start(werewolf, prefix))
                 .addEventListener(new Vote(werewolf, prefix))
+                .addEventListener(new Vote_WW(werewolf, prefix))
                 .build();
 
         jda.awaitReady();

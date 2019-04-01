@@ -45,6 +45,7 @@ public class List extends ListenerAdapter {
 
                     for (Player player1: werewolf.getPlayers()) {
                         eb.addField(player1.getPlayer().getName(), "", true);
+                        eb.addBlankField(false);
                     }
                     channel.sendMessage(eb.build()).queue();
                 }

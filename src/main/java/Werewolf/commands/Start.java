@@ -43,6 +43,7 @@ public class Start extends ListenerAdapter {
                     //    channel.sendMessage("Please add " + (5 - werewolf.getPlayers().size()) + " Players").queue();
                 } else {
                     channel.sendMessage("Game has successfully started.").queue();
+                    werewolf.updatePlayers();
                     werewolf.setRunningGame(true);
                     werewolf.setRoles();
                     for (Player player : werewolf.getPlayers()) {
@@ -58,7 +59,10 @@ public class Start extends ListenerAdapter {
                     eb.setDescription("");
                     for (Player player1: werewolf.getPlayers()) {
                         eb.addField(player1.getShortcut() + player1.getPlayer().getName(), "", true);
+                        eb.addBlankField(false);
                     }
+                    channel.sendMessage(eb.build()).queue();
+                    werewolf.setNight(true);
                     channel.sendMessage("PM the bot with \'.vote <0-99>\' where <0-99> is  the number of who you want to kill.").queue();
                 }
             }
