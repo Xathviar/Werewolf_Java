@@ -28,7 +28,6 @@ public class List extends ListenerAdapter {
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
-        Player player = new Player(author);
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "list")) {
                 if (!werewolf.isGame()) {

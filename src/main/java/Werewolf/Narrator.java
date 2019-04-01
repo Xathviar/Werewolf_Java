@@ -23,6 +23,7 @@ public class Narrator {
                 .addEventListener(new Join(werewolf, prefix))
                 .addEventListener(new List(werewolf, prefix))
                 .addEventListener(new Start(werewolf, prefix))
+                .addEventListener(new Vote(werewolf, prefix))
                 .build();
 
         jda.awaitReady();
