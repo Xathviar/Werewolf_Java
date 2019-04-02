@@ -39,6 +39,13 @@ public class Werewolf {
             return null;
         }
     }
+    public Player getMostVotedWW() {
+        if ((double)players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get().getVoteCounts() == 0) {
+            return null;
+        }else {
+            return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
+        }
+    }
 
     public void resetVoting () {
         players.forEach(n -> n.resetVoteCounts());
