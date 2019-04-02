@@ -1,2 +1,2 @@
 # Werewolf_Java
-A Discord Bot for playing Werewolf made by Alkarion
+This is a Werewolf Discord Bot written by Alkarion
