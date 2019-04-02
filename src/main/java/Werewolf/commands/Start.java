@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.requests.RestAction;
 
 import java.awt.*;
+import java.util.stream.Collectors;
 
 public class Start extends ListenerAdapter {
     private Werewolf werewolf;
@@ -53,15 +54,12 @@ public class Start extends ListenerAdapter {
                     channel.sendMessage("The Villagers are sleeping").queue();
                     channel.sendMessage("The Werewolves awake!").queue();
                     channel.sendMessage("They silently choose their prey").queue();
-                    EmbedBuilder eb = new EmbedBuilder();
-                    eb.setTitle("Prey List");
-                    eb.setColor(Color.red);
-                    eb.setDescription("");
-                    for (Player player1: werewolf.getPlayers()) {
-                        eb.addField(player1.getShortcut() + player1.getPlayer().getName(), "", true);
-                        eb.addBlankField(false);
-                    }
-                    channel.sendMessage(eb.build()).queue();
+                    // for (Player werewolf1 : werewolf.getPlayers().stream().filter(n -> n.isWerewolf()).collect(Collectors.toList())) {
+                    //     werewolf1.getPlayer().openPrivateChannel().complete().sendMessage("Prey List").queue();
+                    //     for (Player player : werewolf.getPlayers()) {
+                    //         werewolf1.getPlayer().openPrivateChannel().complete().sendMessage(player.getShortcut() + " ) " + player.getPlayer().getAsMention()).queue();
+                    //     }
+                    // }
                     werewolf.setNight(true);
                     channel.sendMessage("PM the bot with \'.vote <0-99>\' where <0-99> is  the number of who you want to kill.").queue();
                 }
