@@ -9,11 +9,12 @@ import net.dv8tion.jda.core.entities.Game;
 import javax.security.auth.login.LoginException;
 
 public class Narrator {
+    JDA jda;
 
-    public static void main(String[] args) throws LoginException, InterruptedException {
+    public Narrator(String token) throws InterruptedException, LoginException {
         Character prefix = '.';
         Werewolf werewolf = new Werewolf();
-        JDA jda = new JDABuilder(new Config().token)
+        this.jda =  new JDABuilder(token)
                 .setStatus(OnlineStatus.ONLINE)
                 .setGame(Game.playing("Werewolf"))
                 .setAutoReconnect(true)
@@ -25,9 +26,29 @@ public class Narrator {
                 .addEventListener(new Start(werewolf, prefix))
                 .addEventListener(new Vote(werewolf, prefix))
                 .addEventListener(new Vote_WW(werewolf, prefix))
+                .addEventListener(new FYou(prefix))
                 .build();
-
         jda.awaitReady();
+
     }
 
+    private boolean getStatus() {
+        return jda.getStatus() == JDA.Status.CONNECTED;
+    }
+
+    boolean stopDiscord() {
+        if (getStatus()) {
+            jda.shutdownNow();
+            return true;
+        }
+        return false;
+    }
+
+    boolean startDiscord() throws InterruptedException {
+        if (!getStatus()) {
+            jda.awaitReady();
+            return true;
+        }
+        return false;
+    }
 }

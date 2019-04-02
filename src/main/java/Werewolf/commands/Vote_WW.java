@@ -41,50 +41,83 @@ public class Vote_WW extends ListenerAdapter {
                     channel.sendMessage("There isn't a running game.").queue();
                     //}else if (werewolf.getPlayers().size() < 5) {
                     //    channel.sendMessage("Please add " + (5 - werewolf.getPlayers().size()) + " Players").queue();
-                } else if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted() && werewolf.isNight()) {
+                } else if (werewolf.isNight()) {
                     if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().isWerewolf()) {
                         channel.sendMessage("You are not a Werewolf").queue();
-                    }else {
+                    } else {
                         Matcher matcher = Pattern.compile(".* ([1-9][0-9]*) *").matcher(msg);
                         if (matcher.find()) {
                             int a = Character.getNumericValue(matcher.group(1).charAt(0));
-                            if (werewolf.getPlayers().stream().filter(n -> n.getShortcut() == a).findFirst().orElse(null) == null) {
-                                channel.sendMessage("Please provide a valid vote!").queue();
+                            if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted(a)) {
+                                channel.sendMessage("You already voted for this player").queue();
                             } else {
-                                Player player = werewolf.getPlayers().get(a - 1);
-                                Player werewolf1 = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
-                                werewolf1.setHasVoted(true);
-                                player.incVoteCounts();
-                                channel.sendMessage(author.getAsMention() + " voted for " + player.getPlayer().getAsMention()).queue();
-                                channel.sendMessage(player.getPlayer().getAsMention() + " has currently " + player.getVoteCounts() + " Votes").queue();
-                                if (werewolf.allWWVoted()) {
-                                    Player dead = werewolf.getMostVoted();
-                                    dead.setAlive(false);
-                                    werewolf.resetVoting();
-                                    werewolf.resetVoted();
-                                    global.sendMessage("The Werewolves have chosen their prey.").queue();
-                                    global.sendMessage("The Werewolves go to sleep.").queue();
-                                    global.sendMessage("The Villager wakes up.").queue();
-                                    global.sendMessage(dead.getPlayer().getAsMention() + " died.").queue();
-                                    werewolf.setNight(false);
-                                    werewolf.updatePlayers();
-                                    if (werewolf.checkVictoryWW()) {
-                                        global.sendMessage("The Werewolves won the game.").queue();
-                                        werewolf.setGame(false);
-                                        werewolf.setRunningGame(false);
-                                        werewolf.setNight(true);
-                                        werewolf.resetPlayer();
-                                    } else {
-                                        global.sendMessage("Player List").queue();
-                                        for (Player player1: werewolf.getPlayers())  {
-                                            global.sendMessage(player1.getShortcut() + ") " + player1.getPlayer().getAsMention()).queue();
+                                if (werewolf.getPlayers().stream().filter(n -> n.getShortcut() == a).findFirst().orElse(null) == null) {
+                                    channel.sendMessage("Please provide a valid vote!").queue();
+                                } else {
+                                    Player player = werewolf.getPlayers().get(a - 1);
+                                    Player werewolf1 = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
+                                    werewolf1.setHasVoted(a);
+                                    werewolf1.setDidVote(true);
+                                    player.incVoteCounts();
+                                    channel.sendMessage(author.getAsMention() + " voted for " + player.getPlayer().getAsMention()).queue();
+                                    channel.sendMessage(player.getPlayer().getAsMention() + " has currently " + player.getVoteCounts() + " Votes").queue();
+                                    if (werewolf.allWWVoted()) {
+                                        Player dead = werewolf.getMostVoted();
+                                        dead.setAlive(false);
+                                        werewolf.resetVoting();
+                                        werewolf.resetVoted();
+                                        global.sendMessage("The Werewolves have chosen their prey.").queue();
+                                        global.sendMessage("The Werewolves go to sleep.").queue();
+                                        global.sendMessage("The Villager wakes up.").queue();
+                                        global.sendMessage(dead.getPlayer().getAsMention() + " died.").queue();
+                                        werewolf.setNight(false);
+                                        werewolf.updatePlayers();
+                                        if (werewolf.checkVictoryWW()) {
+                                            global.sendMessage("The Werewolves won the game.").queue();
+                                            werewolf.setGame(false);
+                                            werewolf.setRunningGame(false);
+                                            werewolf.setNight(true);
+                                            werewolf.resetPlayer();
+                                        } else {
+                                            global.sendMessage("Player List").queue();
+                                            for (Player player1 : werewolf.getPlayers()) {
+                                                global.sendMessage(player1.getShortcut() + ") " + player1.getPlayer().getAsMention()).queue();
+                                            }
                                         }
+                                    }
+                                }
+                            }
+                        } else if (Pattern.compile(".* pass *").matcher(msg).find()) {
+                            channel.sendMessage(author.getAsMention() + " voted for nobody").queue();
+                            Player werewolf1 = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
+                            werewolf1.setHasVoted(0);
+                            werewolf1.setDidVote(true);
+                            if (werewolf.allWWVoted()) {
+                                werewolf.resetVoting();
+                                werewolf.resetVoted();
+                                global.sendMessage("The Werewolves have chosen their prey.").queue();
+                                global.sendMessage("The Werewolves go to sleep.").queue();
+                                global.sendMessage("The Villager wakes up.").queue();
+                                global.sendMessage("Nobody died.").queue();
+                                werewolf.setNight(false);
+                                werewolf.updatePlayers();
+                                if (werewolf.checkVictoryWW()) {
+                                    global.sendMessage("The Werewolves won the game.").queue();
+                                    werewolf.setGame(false);
+                                    werewolf.setRunningGame(false);
+                                    werewolf.setNight(true);
+                                    werewolf.resetPlayer();
+                                } else {
+                                    global.sendMessage("Player List").queue();
+                                    for (Player player1 : werewolf.getPlayers()) {
+                                        global.sendMessage(player1.getShortcut() + ") " + player1.getPlayer().getAsMention()).queue();
                                     }
                                 }
                             }
                         } else {
                             channel.sendMessage("Please provide a valid vote!").queue();
                         }
+
                     }
                 } else {
                     channel.sendMessage(author.getAsMention() + " did already vote!").queue();

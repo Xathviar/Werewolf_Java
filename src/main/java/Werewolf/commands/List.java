@@ -36,7 +36,15 @@ public class List extends ListenerAdapter {
                 if (!werewolf.isGame()) {
                     channel.sendMessage("Please create a game!").queue();
                 }else if (werewolf.isRunningGame()) {
-                    channel.sendMessage("There is already a running game.").queue();
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.setTitle("Player List");
+                    eb.setColor(Color.red);
+                    eb.setDescription("");
+                    for (Player player1: werewolf.getPlayers()) {
+                        eb.addField(player1.getShortcut() + " ) " + player1.getPlayer().getName(), "", true);
+                        eb.addBlankField(false);
+                    }
+                    channel.sendMessage(eb.build()).queue();
                 }else {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setTitle("Player List");
@@ -48,6 +56,7 @@ public class List extends ListenerAdapter {
                         eb.addBlankField(false);
                     }
                     channel.sendMessage(eb.build()).queue();
+                    eb.clear();
                 }
             }
         }
