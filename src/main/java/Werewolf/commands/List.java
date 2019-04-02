@@ -56,6 +56,7 @@ public class List extends ListenerAdapter {
                         eb.addBlankField(false);
                     }
                     channel.sendMessage(eb.build()).queue();
+                    eb.clear();
                 }
             }
         }
