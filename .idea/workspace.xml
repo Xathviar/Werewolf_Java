@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" line="93" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" line="97" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47cc25bd-d21f-420b-bc93-138fe6bffc86" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/Narrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/Narrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/commands/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/commands/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote_WW.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote_WW.java" afterDir="false" />
-    </list>
+    <list default="true" id="47cc25bd-d21f-420b-bc93-138fe6bffc86" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="59" column="61" lean-forward="true" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
+            <state relative-caret-position="-23">
+              <caret line="61" column="79" selection-start-line="61" selection-start-column="79" selection-end-line="61" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,27 +30,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="35" column="143" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="143" />
+            <state relative-caret-position="121">
+              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
               <folding>
-                <element signature="e#1215#1216#0" expanded="true" />
-                <element signature="e#1306#1307#0" expanded="true" />
+                <element signature="e#1339#1340#0" expanded="true" />
+                <element signature="e#1430#1431#0" expanded="true" />
                 <element signature="method#setRoles#0;class#Werewolf#0" />
-                <element signature="e#2214#2215#0" expanded="true" />
-                <element signature="e#2287#2288#0" expanded="true" />
-                <element signature="e#2388#2389#0" expanded="true" />
-                <element signature="e#2446#2447#0" expanded="true" />
-                <element signature="e#2518#2519#0" expanded="true" />
-                <element signature="e#2588#2589#0" expanded="true" />
-                <element signature="e#2650#2651#0" expanded="true" />
-                <element signature="e#2724#2725#0" expanded="true" />
-                <element signature="e#2796#2797#0" expanded="true" />
-                <element signature="e#2888#2889#0" expanded="true" />
+                <element signature="e#2338#2339#0" expanded="true" />
+                <element signature="e#2411#2412#0" expanded="true" />
+                <element signature="e#2512#2513#0" expanded="true" />
+                <element signature="e#2570#2571#0" expanded="true" />
+                <element signature="e#2642#2643#0" expanded="true" />
+                <element signature="e#2712#2713#0" expanded="true" />
+                <element signature="e#2774#2775#0" expanded="true" />
+                <element signature="e#2848#2849#0" expanded="true" />
+                <element signature="e#2920#2921#0" expanded="true" />
+                <element signature="e#3012#3013#0" expanded="true" />
                 <element signature="method#updatePlayers#0;class#Werewolf#0" />
-                <element signature="e#3654#3655#0" expanded="true" />
+                <element signature="e#3778#3779#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+            <state relative-caret-position="427">
+              <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -154,10 +146,10 @@
         <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Join.java" />
         <option value="$PROJECT_DIR$/src/main/java/Werewolf/Narrator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/List.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java" />
         <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote_WW.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" />
         <option value="$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java" />
       </list>
     </option>
   </component>
@@ -168,11 +160,11 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1016" />
-    <option name="y" value="382" />
-    <option name="width" value="1370" />
-    <option name="height" value="878" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="556" />
+    <option name="y" value="154" />
+    <option name="width" value="1360" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -239,7 +231,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554149909951" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554149914443" />
     <property name="last.edited.regexp" value=".vote 0" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -290,7 +282,7 @@
       <workItem from="1554107162086" duration="6755000" />
       <workItem from="1554126720148" duration="45000" />
       <workItem from="1554137357095" duration="2304000" />
-      <workItem from="1554140571538" duration="9152000" />
+      <workItem from="1554140571538" duration="9419000" />
     </task>
     <task id="LOCAL-00001" summary="Bot now tells the Role they have to all Players">
       <created>1554143665836</created>
@@ -310,13 +302,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22074000" />
+    <option name="totallyTimeSpent" value="22341000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1035" extended-state="6" />
-    <editor active="true" />
+    <frame x="556" y="154" width="1360" height="877" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2678762" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38203958" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -325,7 +316,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32953104" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2899669" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35113484" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -463,13 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote_WW.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -480,37 +464,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding>
+            <element signature="e#1339#1340#0" expanded="true" />
+            <element signature="e#1430#1431#0" expanded="true" />
+            <element signature="method#setRoles#0;class#Werewolf#0" />
+            <element signature="e#2338#2339#0" expanded="true" />
+            <element signature="e#2411#2412#0" expanded="true" />
+            <element signature="e#2512#2513#0" expanded="true" />
+            <element signature="e#2570#2571#0" expanded="true" />
+            <element signature="e#2642#2643#0" expanded="true" />
+            <element signature="e#2712#2713#0" expanded="true" />
+            <element signature="e#2774#2775#0" expanded="true" />
+            <element signature="e#2848#2849#0" expanded="true" />
+            <element signature="e#2920#2921#0" expanded="true" />
+            <element signature="e#3012#3013#0" expanded="true" />
+            <element signature="method#updatePlayers#0;class#Werewolf#0" />
+            <element signature="e#3778#3779#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Vote.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="59" column="61" lean-forward="true" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
+        <state relative-caret-position="-23">
+          <caret line="61" column="79" selection-start-line="61" selection-start-column="79" selection-end-line="61" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/Werewolf.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Werewolf/commands/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="35" column="143" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="143" />
-          <folding>
-            <element signature="e#1215#1216#0" expanded="true" />
-            <element signature="e#1306#1307#0" expanded="true" />
-            <element signature="method#setRoles#0;class#Werewolf#0" />
-            <element signature="e#2214#2215#0" expanded="true" />
-            <element signature="e#2287#2288#0" expanded="true" />
-            <element signature="e#2388#2389#0" expanded="true" />
-            <element signature="e#2446#2447#0" expanded="true" />
-            <element signature="e#2518#2519#0" expanded="true" />
-            <element signature="e#2588#2589#0" expanded="true" />
-            <element signature="e#2650#2651#0" expanded="true" />
-            <element signature="e#2724#2725#0" expanded="true" />
-            <element signature="e#2796#2797#0" expanded="true" />
-            <element signature="e#2888#2889#0" expanded="true" />
-            <element signature="method#updatePlayers#0;class#Werewolf#0" />
-            <element signature="e#3654#3655#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="427">
+          <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
         </state>
       </provider>
     </entry>
