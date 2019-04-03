@@ -14,13 +14,17 @@ public class Narrator {
     private JDA jda;
 
     public static void main(String[] args) throws LoginException, InterruptedException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Input your Discord-Bot Token: ");
-        String token = scanner.nextLine();
-        Narrator narrator = new Narrator(token);
-        narrator.startDiscord();
+        if (args.length == 0) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Input your Discord-Bot Token: ");
+            String token = scanner.nextLine();
+            Narrator narrator = new Narrator(token);
+            narrator.jda.awaitReady();
+        }else {
+            Narrator narrator = new Narrator(args[0]);
+            narrator.jda.awaitReady();
+        }
     }
-
     private Narrator(String token) throws InterruptedException, LoginException {
         Character prefix = '.';
         Werewolf werewolf = new Werewolf();
@@ -37,28 +41,9 @@ public class Narrator {
                 .addEventListener(new Vote(werewolf, prefix))
                 .addEventListener(new Vote_WW(werewolf, prefix))
                 .addEventListener(new FYou(prefix))
+                .addEventListener(new Help(prefix))
                 .build();
         jda.awaitReady();
 
-    }
-
-    private boolean getStatus() {
-        return jda.getStatus() == JDA.Status.CONNECTED;
-    }
-
-    boolean stopDiscord() {
-        if (getStatus()) {
-            jda.shutdownNow();
-            return true;
-        }
-        return false;
-    }
-
-    boolean startDiscord() throws InterruptedException {
-        if (!getStatus()) {
-            jda.awaitReady();
-            return true;
-        }
-        return false;
     }
 }
