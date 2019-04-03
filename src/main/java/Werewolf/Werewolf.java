@@ -62,16 +62,9 @@ public class Werewolf {
         double needed_ww = getWWCount();
         int ww = 0;
         while (ww < needed_ww) {
-            for (Player player: players) {
-                if (Math.random() < (needed_ww/(double)players.size()) && !player.isWerewolf()) {
-                    player.setWerewolf(true);
-                    ww++;
-                    if (ww == needed_ww) {
-                        break;
-                    }
-                }
-
-            }
+            Player player = players.stream().filter(n -> !n.isWerewolf()).findAny().get();
+            player.setWerewolf(true);
+            ww++;
         }
     }
 
@@ -145,7 +138,7 @@ public class Werewolf {
     }
 
     public boolean checkVictoryWW() {
-        return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() == 0;
+        return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() <= players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
     }
     public boolean checkVictory() {
         return players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size() == 0;

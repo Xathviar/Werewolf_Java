@@ -24,3 +24,5 @@ hs_err_pid*
 src/main/java/Werewolf.Config.java
 plan.txt
 .idea/workspace.xml
+target/*
+.idea

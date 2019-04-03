@@ -48,7 +48,6 @@ public class Start extends ListenerAdapter {
                     werewolf.setRunningGame(true);
                     werewolf.setRoles();
                     for (Player player : werewolf.getPlayers()) {
-                        System.out.println(player.getPlayer().getName() + " is a" + (player.isWerewolf() ? " Werewolf" : " Villager"));
                         player.getPlayer().openPrivateChannel().complete().sendMessage("You are a " + (player.isWerewolf() ? " Werewolf" : " Villager")).queue();
                     }
                     channel.sendMessage("The Villagers are sleeping").queue();
