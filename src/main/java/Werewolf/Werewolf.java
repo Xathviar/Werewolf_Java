@@ -24,11 +24,11 @@ public class Werewolf {
     }
 
     public boolean allVoted() {
-        return players.stream().filter(n -> n.isDidVote()).count() == players.size();
+        return players.stream().filter(n -> n.hasVoted()).count() == players.size();
     }
 
     public boolean allWWVoted () {
-        return players.stream().filter(n -> n.isDidVote() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
+        return players.stream().filter(n -> n.hasVoted() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
 
     }
 
@@ -52,10 +52,7 @@ public class Werewolf {
     }
 
     public void resetVoted () {
-        players.forEach(n -> {
-            n.setHasVoted(0);
-            n.setDidVote(false);
-        });
+        players.forEach(n -> n.setHasVoted(false));
     }
 
     public void setRoles() {

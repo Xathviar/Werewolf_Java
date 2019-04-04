@@ -48,8 +48,8 @@ public class Vote extends ListenerAdapter {
                     Matcher matcher = Pattern.compile(".* ([1-9][0-9]*) *").matcher(msg);
                     if (matcher.find()) {
                         int a = Character.getNumericValue(matcher.group(1).charAt(0));
-                        if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted(a)) {
-                            channel.sendMessage("You already voted for this player").queue();
+                        if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted()) {
+                            channel.sendMessage("You already voted.").queue();
                         } else {
 
                             if (werewolf.getPlayers().stream().filter(n -> n.getShortcut() == a).findFirst().orElse(null) == null) {
@@ -57,8 +57,7 @@ public class Vote extends ListenerAdapter {
                             } else {
                                 werewolf.getPlayers().get(a - 1).incVoteCounts();
                                 Player player = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
-                                player.setHasVoted(a);
-                                player.setDidVote(true);
+                                player.setHasVoted(true);
                                 channel.sendMessage(author.getAsMention() + " voted for " + werewolf.getPlayers().get(a - 1).getPlayer().getAsMention()).queue();
                                 channel.sendMessage(werewolf.getPlayers().get(a - 1).getPlayer().getAsMention() + " has currently " + werewolf.getPlayers().get(a - 1).getVoteCounts() + " Votes").queue();
                                 if (werewolf.allVoted()) {

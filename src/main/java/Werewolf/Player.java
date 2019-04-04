@@ -8,8 +8,7 @@ public class Player {
     private User player;
     private int shortcut;
     private int voteCounts;
-    private int hasVoted;
-    private boolean didVote;
+    private boolean hasVoted;
 
     public Player(User player, char shortcut) {
         this.player = player;
@@ -59,19 +58,12 @@ public class Player {
         voteCounts = 0;
     }
 
-    public boolean hasVoted(int currentVote) {
-        return hasVoted == currentVote || hasVoted == 0;
+    public boolean hasVoted() {
+        return hasVoted;
     }
 
-    public void setHasVoted(int hasVoted) {
+    public void setHasVoted(boolean hasVoted) {
         this.hasVoted = hasVoted;
     }
 
-    public boolean isDidVote() {
-        return didVote;
-    }
-
-    public void setDidVote(boolean didVote) {
-        this.didVote = didVote;
-    }
 }
