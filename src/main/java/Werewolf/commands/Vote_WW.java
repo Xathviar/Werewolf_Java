@@ -48,8 +48,8 @@ public class Vote_WW extends ListenerAdapter {
                         Matcher matcher = Pattern.compile(".* ([1-9][0-9]*) *").matcher(msg);
                         if (matcher.find()) {
                             int a = Character.getNumericValue(matcher.group(1).charAt(0));
-                            if (!werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted(a)) {
-                                channel.sendMessage("You already voted for this player").queue();
+                            if (werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get().hasVoted()) {
+                                channel.sendMessage("You already voted!").queue();
                             } else {
                                 if (werewolf.getPlayers().stream().filter(n -> n.getShortcut() == a).findFirst().orElse(null) == null) {
                                     channel.sendMessage("Please provide a valid vote!").queue();
@@ -59,13 +59,12 @@ public class Vote_WW extends ListenerAdapter {
                                     if (player == werewolf1) {
                                         channel.sendMessage("You cannot vote for yourself!").queue();
                                     }else {
-                                        werewolf1.setHasVoted(a);
-                                        werewolf1.setDidVote(true);
+                                        werewolf1.setHasVoted(true);
                                         player.incVoteCounts();
                                         channel.sendMessage(author.getAsMention() + " voted for " + player.getPlayer().getAsMention()).queue();
                                         channel.sendMessage(player.getPlayer().getAsMention() + " has currently " + player.getVoteCounts() + " Votes").queue();
                                         if (werewolf.allWWVoted()) {
-                                            Player dead = werewolf.getMostVoted();
+                                            Player dead = werewolf.getMostVotedWW();
                                             dead.setAlive(false);
                                             werewolf.resetVoting();
                                             werewolf.resetVoted();
@@ -94,8 +93,7 @@ public class Vote_WW extends ListenerAdapter {
                         } else if (Pattern.compile(".pass *").matcher(msg).find()) {
                             channel.sendMessage(author.getAsMention() + " voted for nobody").queue();
                             Player werewolf1 = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
-                            werewolf1.setHasVoted(0);
-                            werewolf1.setDidVote(true);
+                            werewolf1.setHasVoted(true);
                             if (werewolf.allWWVoted()) {
                                 Player dead = werewolf.getMostVotedWW();
                                 werewolf.resetVoting();

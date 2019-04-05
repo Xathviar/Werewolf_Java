@@ -41,8 +41,7 @@ public class List extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setDescription("");
                     for (Player player1: werewolf.getPlayers()) {
-                        eb.addField(player1.getShortcut() + " ) " + player1.getPlayer().getName(), "", true);
-                        eb.addBlankField(false);
+                        eb.addField(player1.getShortcut() + " ) " + player1.getPlayer().getName(), "", false);
                     }
                     channel.sendMessage(eb.build()).queue();
                 }else {
@@ -52,8 +51,7 @@ public class List extends ListenerAdapter {
                     eb.setDescription("");
 
                     for (Player player1: werewolf.getPlayers()) {
-                        eb.addField(player1.getPlayer().getName(), "", true);
-                        eb.addBlankField(false);
+                        eb.addField(player1.getPlayer().getName(), "", false);
                     }
                     channel.sendMessage(eb.build()).queue();
                     eb.clear();

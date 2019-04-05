@@ -6,6 +6,7 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Werewolf {
@@ -24,27 +25,20 @@ public class Werewolf {
     }
 
     public boolean allVoted() {
-        return players.stream().filter(n -> n.isDidVote()).count() == players.size();
+        return players.stream().filter(n -> n.hasVoted()).count() == players.size();
     }
 
     public boolean allWWVoted () {
-        return players.stream().filter(n -> n.isDidVote() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
+        return players.stream().filter(n -> n.hasVoted() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).count();
 
     }
 
     public Player getMostVoted() {
-        if ((double)players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get().getVoteCounts() / (double)players.size() > 0.5) {
             return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
-        }else {
-            return null;
-        }
     }
+
     public Player getMostVotedWW() {
-        if ((double)players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get().getVoteCounts() == 0) {
-            return null;
-        }else {
-            return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
-        }
+        return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
     }
 
     public void resetVoting () {
@@ -53,20 +47,23 @@ public class Werewolf {
 
     public void resetVoted () {
         players.forEach(n -> {
-            n.setHasVoted(0);
-            n.setDidVote(false);
+            n.setHasVoted(false);
         });
     }
 
     public void setRoles() {
         double needed_ww = getWWCount();
         int ww = 0;
+        Random randomGenerator = new Random();
         while (ww < needed_ww) {
-            Player player = players.stream().filter(n -> !n.isWerewolf()).findAny().get();
-            player.setWerewolf(true);
-            ww++;
+            Player player = players.get(randomGenerator.nextInt(players.size()));
+            if (!player.isWerewolf()) {
+                player.setWerewolf(true);
+                ww++;
+            }
         }
     }
+
 
     private double getWWCount() {
         if (players.size() < 7) {

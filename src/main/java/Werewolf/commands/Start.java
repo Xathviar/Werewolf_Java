@@ -40,8 +40,8 @@ public class Start extends ListenerAdapter {
 
                 } else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
-                }else if (werewolf.getPlayers().size() < 5) {
-                     channel.sendMessage("Please add at least " + (5 - werewolf.getPlayers().size()) + " more players").queue();
+                } else if (werewolf.getPlayers().size() < 5) {
+                    channel.sendMessage("Please add at least " + (5 - werewolf.getPlayers().size()) + " more players").queue();
                 } else {
                     channel.sendMessage("Game has successfully started.").queue();
                     werewolf.updatePlayers();
@@ -53,13 +53,16 @@ public class Start extends ListenerAdapter {
                     channel.sendMessage("The Villagers are sleeping").queue();
                     channel.sendMessage("The Werewolves awake!").queue();
                     channel.sendMessage("They silently choose their prey").queue();
-                    // for (Player werewolf1 : werewolf.getPlayers().stream().filter(n -> n.isWerewolf()).collect(Collectors.toList())) {
-                    //     werewolf1.getPlayer().openPrivateChannel().complete().sendMessage("Prey List").queue();
-                    //     for (Player player : werewolf.getPlayers()) {
-                    //         werewolf1.getPlayer().openPrivateChannel().complete().sendMessage(player.getShortcut() + " ) " + player.getPlayer().getAsMention()).queue();
-                    //     }
-                    // }
+                    for (Player werewolf1 : werewolf.getPlayers().stream().filter(n -> n.isWerewolf()).collect(Collectors.toList())) {
+                        werewolf1.getPlayer().openPrivateChannel().complete().sendMessage("Prey List").queue();
+                        for (Player player : werewolf.getPlayers()) {
+                            werewolf1.getPlayer().openPrivateChannel().complete().sendMessage(player.getShortcut() + " ) " + player.getPlayer().getAsMention()).queue();
+                        }
+                    }
                     werewolf.setNight(true);
+                    werewolf.resetVoting();
+                    werewolf.resetVoted();
+
                     channel.sendMessage("PM the bot with \'.vote <0-99>\' where <0-99> is  the number of who you want to kill.").queue();
                 }
             }
