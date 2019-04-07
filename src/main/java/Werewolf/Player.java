@@ -9,6 +9,7 @@ public class Player {
     private int shortcut;
     private int voteCounts;
     private boolean hasVoted;
+    private boolean wantsToStop;
 
     public Player(User player, char shortcut) {
         this.player = player;
@@ -17,6 +18,7 @@ public class Player {
         hasVoted = false;
         this.shortcut = shortcut;
         voteCounts = 0;
+        wantsToStop = false;
     }
 
     public boolean isAlive() {
@@ -65,5 +67,13 @@ public class Player {
 
     public void setHasVoted(boolean hasVoted) {
         this.hasVoted = hasVoted;
+    }
+
+    public boolean wantsToStop() {
+        return wantsToStop;
+    }
+
+    public void setWantsToStop(boolean wantsToStop) {
+        this.wantsToStop = wantsToStop;
     }
 }

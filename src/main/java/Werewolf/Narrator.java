@@ -40,6 +40,7 @@ public class Narrator {
                 .addEventListener(new Start(werewolf, prefix))
                 .addEventListener(new Vote(werewolf, prefix))
                 .addEventListener(new Vote_WW(werewolf, prefix))
+                .addEventListener(new Stop(werewolf, prefix))
                 .addEventListener(new FYou(prefix))
                 .addEventListener(new Help(prefix))
                 .build();

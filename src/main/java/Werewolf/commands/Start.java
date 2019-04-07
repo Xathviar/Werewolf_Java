@@ -40,9 +40,11 @@ public class Start extends ListenerAdapter {
 
                 } else if (werewolf.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
-                } else if (werewolf.getPlayers().size() < 5) {
-                    channel.sendMessage("Please add at least " + (5 - werewolf.getPlayers().size()) + " more players").queue();
-                } else {
+                }
+//                else if (werewolf.getPlayers().size() < 5) {
+//                    channel.sendMessage("Please add at least " + (5 - werewolf.getPlayers().size()) + " more players").queue();
+//                }
+                else {
                     channel.sendMessage("Game has successfully started.").queue();
                     werewolf.updatePlayers();
                     werewolf.setRunningGame(true);

@@ -1,6 +1,7 @@
 package Werewolf.commands;
 
 import Werewolf.Werewolf;
+import Werewolf.Player;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -9,7 +10,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class Stop extends ListenerAdapter {
     Werewolf werewolf;
-    Character prefix;
+    private Character prefix;
 
     public Stop(Werewolf werewolf, Character prefix) {
         this.werewolf = werewolf;
@@ -22,11 +23,24 @@ public class Stop extends ListenerAdapter {
         MessageChannel channel = event.getChannel();    //This is the MessageChannel that the message was sent to.
         String msg = message.getContentDisplay();       //msg
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
-        MessageChannel global = werewolf.getChannel();
-        if (!isBot && msg.equalsIgnoreCase(prefix + "stop") && author.getId().equals("563076963242082326")) {
-            werewolf.setGame(false);
-            werewolf.setRunningGame(false);
-            werewolf.setNight(true);
+        if (!isBot && msg.equalsIgnoreCase(prefix + "stop")) {
+            Player player = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
+            player.setWantsToStop(true);
+            if (werewolf.checkStop()) {
+                werewolf.setGame(false);
+                werewolf.setRunningGame(false);
+                werewolf.setNight(true);
+                werewolf.resetVoted();
+                werewolf.resetVoting();
+                werewolf.resetPlayer();
+                werewolf.resetStop();
+                channel.sendMessage("Game has been successfully stopped").queue();
+            } else {
+                double needed = (werewolf.getPlayers().size() * 0.6);
+                double current = werewolf.getPlayers().stream().filter(n -> n.wantsToStop()).count();
+                channel.sendMessage("There are currently " + current + " Players voting to stop the game.").queue();
+                channel.sendMessage("You still need " + (needed - current) + " more.").queue();
+            }
         }
     }
 }

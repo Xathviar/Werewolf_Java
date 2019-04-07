@@ -16,7 +16,9 @@ public class Werewolf {
     private List<Player> players;
     private MessageChannel channel;
 
-
+    /**
+     * Constructor for Werewolf
+     */
     public Werewolf() {
         game = false;
         runningGame = false;
@@ -24,33 +26,50 @@ public class Werewolf {
         isNight = true;
     }
 
+    /**
+     * Checks if all Players already voted
+     * @return boolean
+     */
     public boolean allVoted() {
         return players.stream().filter(n -> n.hasVoted()).count() == players.size();
     }
 
+    /**
+     * Checks if all Werewolfs already voted
+     * @return boolean
+     */
     public boolean allWWVoted () {
         return players.stream().filter(n -> n.hasVoted() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).count();
 
     }
 
+    /**
+     * returns the most voted Player
+     * @return Werewolf.Player
+     */
     public Player getMostVoted() {
             return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
     }
 
-    public Player getMostVotedWW() {
-        return players.stream().max(Comparator.comparingInt(n -> n.getVoteCounts())).get();
-    }
-
+    /**
+     * Resets all Votecounts from all Players
+     */
     public void resetVoting () {
         players.forEach(n -> n.resetVoteCounts());
     }
 
+    /**
+     * Resets all Votes from all Players
+     */
     public void resetVoted () {
         players.forEach(n -> {
             n.setHasVoted(false);
         });
     }
 
+    /**
+     * Makes the Roles
+     */
     public void setRoles() {
         double needed_ww = getWWCount();
         int ww = 0;
@@ -64,7 +83,10 @@ public class Werewolf {
         }
     }
 
-
+    /**
+     * Returns how many Werewolves there will be
+     * @return double
+     */
     private double getWWCount() {
         if (players.size() < 7) {
             return 1.0;
@@ -79,30 +101,58 @@ public class Werewolf {
         }
     }
 
+    /**
+     * Adds a new Player to the Game
+     * @param player the Player that will be added
+     */
     public void addPlayer(Player player) {
         players.add(player);
     }
 
+    /**
+     * sets Game
+     * @param game sets whether there is a game or not
+     */
     public void setGame(boolean game) {
         this.game = game;
     }
 
+    /**
+     * sets Running Game
+     * @param runningGame sets whether there is a running game or not
+     */
     public void setRunningGame(boolean runningGame) {
         this.runningGame = runningGame;
     }
 
+    /**
+     * checks whether there is a Game or not
+     * @return boolean
+     */
     public boolean isGame() {
         return game;
     }
 
+    /**
+     * checks whether there is a running Game or not
+     * @return boolean
+     */
     public boolean isRunningGame() {
         return runningGame;
     }
 
+    /**
+     * Returns all players
+     * @return List<Player>
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * Returns whether it is night or not
+     * @return boolean
+     */
     public boolean isNight() {
         return isNight;
     }
@@ -137,11 +187,20 @@ public class Werewolf {
     public boolean checkVictoryWW() {
         return players.stream().filter(n -> !n.isWerewolf()).collect(Collectors.toList()).size() <= players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
     }
+
     public boolean checkVictory() {
         return players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size() == 0;
     }
 
     public void resetPlayer() {
         players = new ArrayList<>();
+    }
+
+    public boolean checkStop() {
+        return players.stream().filter(n -> n.wantsToStop()).count() > (players.size() * 0.6);
+    }
+
+    public void resetStop() {
+        players.forEach(n -> n.setWantsToStop(false));
     }
 }

@@ -64,7 +64,7 @@ public class Vote_WW extends ListenerAdapter {
                                         channel.sendMessage(author.getAsMention() + " voted for " + player.getPlayer().getAsMention()).queue();
                                         channel.sendMessage(player.getPlayer().getAsMention() + " has currently " + player.getVoteCounts() + " Votes").queue();
                                         if (werewolf.allWWVoted()) {
-                                            Player dead = werewolf.getMostVotedWW();
+                                            Player dead = werewolf.getMostVoted();
                                             dead.setAlive(false);
                                             werewolf.resetVoting();
                                             werewolf.resetVoted();
@@ -95,7 +95,7 @@ public class Vote_WW extends ListenerAdapter {
                             Player werewolf1 = werewolf.getPlayers().stream().filter(n -> n.getPlayer().getId().equals(author.getId())).findFirst().get();
                             werewolf1.setHasVoted(true);
                             if (werewolf.allWWVoted()) {
-                                Player dead = werewolf.getMostVotedWW();
+                                Player dead = werewolf.getMostVoted();
                                 werewolf.resetVoting();
                                 werewolf.resetVoted();
                                 if (dead==null) {
