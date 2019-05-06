@@ -37,9 +37,8 @@ public class Join extends ListenerAdapter {
                 }else if (game.getPlayers().stream().anyMatch(n -> n.getPlayer().getId().equals(author.getId()))) {
                     channel.sendMessage("Player " + author.getAsMention() + " is already registered").queue();
                 }else {
-                    Player player = new Player(author, (char)(game.getPlayers().size() + 1));
                     channel.sendMessage("Player " + author.getAsMention() + " has been successfully added").queue();
-                    game.addPlayer(player);
+                    game.joined_players.add(author);
                 }
             }
         }

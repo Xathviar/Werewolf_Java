@@ -3,6 +3,7 @@ package Werewolf.commands;
 import Werewolf.Game;
 import Werewolf.Player;
 
+import Werewolf.players.Class;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
@@ -41,7 +42,7 @@ public class List extends ListenerAdapter {
                     eb.setTitle("Player List");
                     eb.setColor(Color.red);
                     eb.setDescription("");
-                    for (Player player1: game.getPlayers()) {
+                    for (Class player1: game.getPlayers()) {
                         eb.addField(player1.getShortcut() + " ) " + player1.getPlayer().getName(), "", true);
                         eb.addBlankField(false);
                     }
@@ -52,7 +53,7 @@ public class List extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setDescription("");
 
-                    for (Player player1: game.getPlayers()) {
+                    for (Class player1: game.getPlayers()) {
                         eb.addField(player1.getPlayer().getName(), "", true);
                         eb.addBlankField(false);
                     }

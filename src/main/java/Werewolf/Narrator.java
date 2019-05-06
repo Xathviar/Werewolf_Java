@@ -32,7 +32,6 @@ public class Narrator {
                 .addEventListener(new List(game, prefix))
                 .addEventListener(new Start(game, prefix))
                 .addEventListener(new Vote(game, prefix))
-                .addEventListener(new Vote_WW(game, prefix))
                 .addEventListener(new FYou(prefix))
                 .build();
         jda.awaitReady();

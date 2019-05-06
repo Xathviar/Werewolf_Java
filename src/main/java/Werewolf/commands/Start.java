@@ -1,7 +1,7 @@
 package Werewolf.commands;
 
 import Werewolf.Game;
-import Werewolf.Player;
+import Werewolf.players.Class;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -41,8 +41,8 @@ public class Start extends ListenerAdapter {
                     game.updatePlayers();
                     game.setRunningGame(true);
                     game.setRoles();
-                    for (Player player : game.getPlayers()) {
-                        player.getPlayer().openPrivateChannel().complete().sendMessage("You are a " + (player.isWerewolf() ? " Werewolf" : " Villager")).queue();
+                    for (Class player : game.getPlayers()) {
+                        player.getPlayer().openPrivateChannel().complete().sendMessage("You are a "+ player.getClass().toString()).queue();
                     }
                     channel.sendMessage("The Villagers are sleeping").queue();
                     channel.sendMessage("The Werewolves awake!").queue();
