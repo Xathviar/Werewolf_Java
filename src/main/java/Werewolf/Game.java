@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import Werewolf.players.Class;
 
-public class Werewolf {
+public class Game {
     private boolean game;
     private boolean runningGame;
     private boolean isNight;
@@ -16,7 +17,7 @@ public class Werewolf {
     private MessageChannel channel;
 
 
-    public Werewolf() {
+    public Game() {
         game = false;
         runningGame = false;
         players = new ArrayList<Player>();
@@ -29,7 +30,10 @@ public class Werewolf {
 
     public boolean allWWVoted () {
         return players.stream().filter(n -> n.hasVoted() && n.isWerewolf()).count() == players.stream().filter(n -> n.isWerewolf()).collect(Collectors.toList()).size();
+    }
 
+    public boolean allVoted (Class player) {
+        return players.stream().filter(n -> n.hasVoted() && n.getClass().equals(player.getClass())).count() == players.stream().filter(n -> n.getClass().equals(player.getClass())).count();
     }
 
     public Player getMostVoted() {
@@ -127,8 +131,6 @@ public class Werewolf {
                 player.setShortcut(c);
                 c++;
                 players1.add(player);
-            } else {
-                player.setShortcut(0);
             }
         }
         players = players1;

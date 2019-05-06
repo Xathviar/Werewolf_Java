@@ -1,6 +1,6 @@
 package Werewolf.commands;
 
-import Werewolf.Werewolf;
+import Werewolf.Game;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -8,11 +8,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class Create extends ListenerAdapter {
-    private Werewolf werewolf;
+    private Game game;
     private Character prefix;
 
-    public Create(Werewolf werewolf, Character prefix) {
-        this.werewolf = werewolf;
+    public Create(Game game, Character prefix) {
+        this.game = game;
         this.prefix = prefix;
 
     }
@@ -26,15 +26,15 @@ public class Create extends ListenerAdapter {
         boolean isBot = author.isBot();                 //Determines whether user is a bot or not
         if (!isBot) {
             if (msg.equalsIgnoreCase(prefix + "create")) {
-                if (werewolf.isGame()) {
+                if (game.isGame()) {
                     channel.sendMessage("There is already a game.").queue();
 
-                }else if (werewolf.isRunningGame()) {
+                }else if (game.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
                 }else {
-                    werewolf.setChannel(channel);
+                    game.setChannel(channel);
                     channel.sendMessage("Game has been successfully created.").queue();
-                    werewolf.setGame(true);
+                    game.setGame(true);
                 }
             }
         }
