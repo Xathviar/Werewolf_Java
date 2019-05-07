@@ -34,8 +34,8 @@ public class Start extends ListenerAdapter {
 
                 } else if (game.isRunningGame()) {
                     channel.sendMessage("There is already a running game.").queue();
-                }else if (game.getPlayers().size() < 5) {
-                     channel.sendMessage("Please add at least " + (5 - game.getPlayers().size()) + " more players").queue();
+                }else if (game.joined_players.size() < 5) {
+                     channel.sendMessage("Please add at least " + (5 - game.joined_players.size()) + " more players").queue();
                 } else {
                     channel.sendMessage("Game has successfully started.").queue();
                     game.updatePlayers();

@@ -37,6 +37,10 @@ public class Game {
         fillClasses();
     }
 
+    public List<Class> getCandidates() {
+        return candidates;
+    }
+
     private void fillCandidates() {
         candidates.add(new Werewolf());
         candidates.add(new Innocent());
