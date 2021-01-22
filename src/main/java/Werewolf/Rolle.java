@@ -5,13 +5,22 @@ public enum Rolle {
     HEXE("Hexe", StateMachine.HEXE),
     SEHER("Seher", StateMachine.SEHER),
     ARMOR("Armor", StateMachine.ARMOR),
-    DORFBEWOHNER("Dorfbewohner");
+    DORFBEWOHNER("Dorfbewohner", StateMachine.VOTING);
 
     private String name;
-    private StateMachine[] state;
+    private StateMachine state;
 
-    Rolle(String name, StateMachine... state) {
+    Rolle(String name, StateMachine state) {
         this.name = name;
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public StateMachine getState() {
+        return state;
     }
 }

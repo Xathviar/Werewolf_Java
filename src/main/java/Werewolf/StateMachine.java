@@ -10,18 +10,6 @@ public enum StateMachine {
     LOBBY {
         @Override
         public StateMachine newState(Werwolf werwolf) {
-            return START;
-        }
-    },
-    START {
-        @Override
-        public StateMachine newState(Werwolf werwolf) {
-            return SETPLAYERROLES;
-        }
-    },
-    SETPLAYERROLES {
-        @Override
-        public StateMachine newState(Werwolf werwolf) {
             werwolf.initRollen();
             return NACHT;
         }
