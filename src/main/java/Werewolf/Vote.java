@@ -23,18 +23,34 @@ public class Vote {
     public void initVoting() {
         resetVoting();
         initVictims(rolle);
-        switch (rolle) {
-            case WERWOLF:
-            case DORFBEWOHNER:
-            case HEXE:
-            case ARMOR:
-            case SEHER:
-        }
     }
 
     private void initVictims(Rolle rolle) {
         Set<Spieler> spieler = werwolf.getSpieler();
         List<Spieler> votableSpieler = spieler.stream().filter(n -> n.getRolle() != rolle).collect(Collectors.toList());
+        for (Spieler spieler1 : votableSpieler) {
+            if (rolle != Rolle.DORFBEWOHNER) {
+                switch (rolle) {
+                    case WERWOLF:
+                        if (spieler1.getRolle() == Rolle.WERWOLF) {
+                            break;
+                        }
+                        votedSpieler.add(new Victim(spieler1, werwolf.werwolfChannel, "☠️", "❓"));
+                        break;
+                    case HEXE:
+                        votedSpieler.add(new Victim(spieler1, werwolf.hexeChannel, "☠️"));
+                        break;
+                    case ARMOR:
+                        votedSpieler.add(new Victim(spieler1, werwolf.armorChannel, "\uD83D\uDC98"));
+                        break;
+                    case SEHER:
+                        votedSpieler.add(new Victim(spieler1, werwolf.seherChannel, "\uD83D\uDC40"));
+                        break;
+                }
+            } else {
+                votedSpieler.add(new Victim(spieler1, werwolf.votingChannel, ":x:"));
+            }
+        }
     }
 
     public boolean canVote(User user) {
@@ -60,7 +76,7 @@ public class Vote {
         votedSpieler.stream().filter(n -> n.getUser().equals(victim)).findFirst().get().decrementVotes();
     }
 
-    public Spieler getVotedSpieler() {
+    public Spieler getMostVotedVictim() {
         int max = 0;
         Victim currentVictim = null;
         for (Victim victim : votedSpieler) {

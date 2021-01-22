@@ -14,6 +14,7 @@ public class Werwolf {
     private Spieler buergermeister;
     private Spieler serverCreator;
     private Settings settings;
+    private Vote vote;
 
     private StateMachine currentState;
     private int rounds;
@@ -33,7 +34,7 @@ public class Werwolf {
         spieler = new TreeSet<>();
         settings = new Settings();
         members = new ArrayList<>();
-
+        vote = new Vote(this);
     }
 
     public void setJDA(JDA jda) {
@@ -359,5 +360,13 @@ public class Werwolf {
 
     public Set<Spieler> getSpieler() {
         return spieler;
+    }
+
+    public Vote getVote() {
+        return vote;
+    }
+
+    public void sendNarrator(String s) {
+        erzaehlerChannel.sendMessage(s).queue();
     }
 }

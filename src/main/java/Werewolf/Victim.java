@@ -1,21 +1,27 @@
 package Werewolf;
 
-import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 
+import java.awt.*;
+
 public class Victim {
-    private Message message;
     private Spieler spieler;
     private int voteCount;
+    private String messageID;
 
     public Victim(Spieler spieler, MessageChannel channel, String... emotes) {
         this.spieler = spieler;
-        message = channel.sendMessage("Vote for " + spieler.getNameAsMention()).complete();
-        channel.sendMessage(message).queue();
-        for (String emote : emotes) {
-            message.addReaction(emote).queue();
-        }
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setDescription("Vote für " + spieler.getNameAsMention());
+        eb.setColor(Color.GREEN);
+        channel.sendMessage(eb.build()).queue((message) -> {
+            for (String emote : emotes) {
+                message.addReaction(emote).queue();
+            }
+            this.messageID = message.getId();
+        });
         this.voteCount = 0;
     }
 
