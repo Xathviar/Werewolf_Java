@@ -1,5 +1,6 @@
 package Werewolf;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
@@ -50,5 +51,9 @@ public class Spieler implements Comparable<Spieler> {
 
     public void sendPrivateMessage(String message) {
         privateChannel.sendMessage(message).queue();
+    }
+
+    public void sendPrivateMessage(EmbedBuilder builder) {
+        privateChannel.sendMessage(builder.build()).queue();
     }
 }

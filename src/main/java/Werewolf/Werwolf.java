@@ -20,13 +20,13 @@ public class Werwolf {
     private JDA jda;
     private List<Member> members;
 
-    private TextChannel armorChannel;
-    private TextChannel hexeChannel;
-    private TextChannel seherChannel;
-    private TextChannel werwolfChannel;
-    private TextChannel votingChannel;
-    private TextChannel erzaehlerChannel;
-    private TextChannel lobby;
+    TextChannel armorChannel;
+    TextChannel hexeChannel;
+    TextChannel seherChannel;
+    TextChannel werwolfChannel;
+    TextChannel votingChannel;
+    TextChannel erzaehlerChannel;
+    TextChannel lobby;
 
     public Werwolf() {
         currentState = StateMachine.IDLE;
@@ -164,7 +164,7 @@ public class Werwolf {
                 }
             }
             this.spieler.add(new Spieler(user));
-            channel.sendMessage("Du bist dem Spiel beigetreten.").queue();
+            channel.sendMessage(user.getAsMention() + " ist dem Spiel beigetreten.").queue();
             return;
         }
         if (currentState == StateMachine.IDLE) {
@@ -256,10 +256,12 @@ public class Werwolf {
     }
 
 
-    public void createLobby(MessageChannel channel) {
+    public void createLobby(User author, MessageChannel channel) {
         if (currentState == StateMachine.IDLE) {
             currentState = currentState.newState(this);
             channel.sendMessage("Die Lobby wurde erfolgreich erstellt.").queue();
+            addnewUser(author, channel);
+            serverCreator = getSpielerFromUser(author);
         } else {
             if (currentState == StateMachine.LOBBY) {
                 channel.sendMessage("Die Lobby wurde nicht erstellt weil bereits eine Lobby vorhanden ist.").queue();
@@ -269,7 +271,7 @@ public class Werwolf {
         }
     }
 
-    public void sendList(MessageChannel channel) {
+    public void sendList(MessageChannel channel, User author) {
         if (currentState == StateMachine.IDLE) {
             channel.sendMessage("Es gibt keine Team-Liste da noch keine Lobby initializiert wurde.").queue();
         } else if (currentState == StateMachine.LOBBY) {
@@ -285,8 +287,21 @@ public class Werwolf {
                 channel.sendMessage(createListe(Rolle.WERWOLF).build()).queue();
             } else if (channel.equals(votingChannel)) {
                 channel.sendMessage(createListe(Rolle.DORFBEWOHNER).build()).queue();
+            } else if (channel.getType() == ChannelType.PRIVATE) {
+                Spieler spieler = getSpielerFromUser(author);
+                if (spieler != null) {
+                    spieler.sendPrivateMessage(createListe(spieler.getRolle()));
+                }
             }
         }
+    }
+
+    public Spieler getSpielerFromUser(User author) {
+        for (Spieler spieler1 : spieler) {
+            if (author.getId().equals(spieler1.getUser().getId()))
+                return spieler1;
+        }
+        return null;
     }
 
     public void startLobby(MessageChannel channel) {
@@ -328,13 +343,21 @@ public class Werwolf {
         int i = 1;
         for (Spieler spieler : spieler) {
             if (rolle == spieler.getRolle()) {
-                sb.append(i).append(". ").append(spieler.getNameAsMention()).append(" - ").append(spieler.getRolle()).append("\n");
+                sb.append(i).append(". ").append(spieler.getNameAsMention()).append(" - ").append(spieler.getRolle()).append("  ").append(spieler.getRolle().getEmoji()).append("\n");
             } else {
-                sb.append(i).append(". ").append(spieler.getNameAsMention()).append(" - ").append(Rolle.DORFBEWOHNER).append("\n");
+                sb.append(i).append(". ").append(spieler.getNameAsMention()).append(" - ").append(Rolle.DORFBEWOHNER).append("  ").append(Rolle.DORFBEWOHNER.getEmoji()).append("\n");
             }
             i++;
         }
         eb.setDescription(sb.toString());
         return eb;
+    }
+
+    public void removeUser(User author, MessageChannel channel) {
+
+    }
+
+    public Set<Spieler> getSpieler() {
+        return spieler;
     }
 }

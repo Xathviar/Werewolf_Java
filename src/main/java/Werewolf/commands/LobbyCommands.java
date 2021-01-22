@@ -24,13 +24,15 @@ public class LobbyCommands extends ListenerAdapter {
 
         if (!author.isBot()) {
             if (msg.toLowerCase().startsWith("!lobby")) {
-                werwolf.createLobby(channel);
+                werwolf.createLobby(author, channel);
             } else if (msg.toLowerCase().startsWith("!join")) {
                 werwolf.addnewUser(author, channel);
             } else if (msg.toLowerCase().startsWith("!list")) {
-                werwolf.sendList(channel);
+                werwolf.sendList(channel, author);
             } else if (msg.toLowerCase().startsWith("!start")) {
                 werwolf.startLobby(channel);
+            } else if (msg.toLowerCase().startsWith("!leave")) {
+                werwolf.removeUser(author, channel);
             }
         }
     }
